@@ -2216,86 +2216,226 @@ export const locations = [
           "name":"Lagos State",
           "id":25,
           "locals":[
-             {
-                "name":"Agege",
-                "id":506
-             },
-             {
-                "name":"Ajeromi-Ifelodun",
-                "id":507
-             },
-             {
-                "name":"Alimosho",
-                "id":508
-             },
-             {
-                "name":"Amuwo-Odofin",
-                "id":509
-             },
-             {
-                "name":"Apapa",
-                "id":510
-             },
-             {
-                "name":"Badagry",
-                "id":511
-             },
-             {
-                "name":"Epe",
-                "id":512
-             },
-             {
-                "name":"Eti Osa",
-                "id":513
-             },
-             {
-                "name":"Ibeju-Lekki",
-                "id":514
-             },
-             {
-                "name":"Ifako-Ijaiye",
-                "id":515
-             },
-             {
-                "name":"Ikeja",
-                "id":516
-             },
-             {
-                "name":"Ikorodu",
-                "id":517
-             },
-             {
-                "name":"Kosofe",
-                "id":518
-             },
-             {
-                "name":"Lagos Island",
-                "id":519
-             },
-             {
-                "name":"Lagos Mainland",
-                "id":520
-             },
-             {
-                "name":"Mushin",
-                "id":521
-             },
-             {
-                "name":"Ojo",
-                "id":522
-             },
-             {
-                "name":"Oshodi-Isolo",
-                "id":523
-             },
-             {
-                "name":"Shomolu",
-                "id":524
-             },
-             {
-                "name":"Surulere",
-                "id":525
-             }
+            {
+               "name": "Abule‐Egba",
+               "id": 801
+            },
+            {
+               "name": "Agbado‐Ijaiye",
+               "id": 802
+            },
+            {
+               "name": "Agege",
+               "id": 803
+            },
+            {
+               "name": "Ajah",
+               "id": 804
+            },
+            {
+               "name": "Ajegunle",
+               "id": 805
+            },
+            {
+               "name": "Akoka",
+               "id": 806
+            },
+            {
+               "name": "Alaba",
+               "id": 807
+            },
+            {
+               "name": "Alaba‐Suru",
+               "id": 808
+            },
+            {
+               "name": "Alagbado",
+               "id": 809
+            },
+            {
+               "name": "Amukoko",
+               "id": 810
+            },
+            {
+               "name": "Apapa",
+               "id": 811
+            },
+            {
+               "name": "Badagry",
+               "id": 812
+            },
+            {
+               "name": "Bariga",
+               "id": 813
+            },
+            {
+               "name": "Dopemu",
+               "id": 814
+            },
+            {
+               "name": "Ebute‐Metta",
+               "id": 815
+            },
+            {
+               "name": "Ejigbo",
+               "id": 816
+            },
+            {
+               "name": "Epe",
+               "id": 817
+            },
+            {
+               "name": "Fadeyi",
+               "id": 818
+            },
+            {
+               "name": "Fagba",
+               "id": 819
+            },
+            {
+               "name": "Festac",
+               "id": 820
+            },
+            {
+               "name": "Gbagada",
+               "id": 821
+            },
+            {
+               "name": "Ifako‐Ijaiye",
+               "id": 822
+            },
+            {
+               "name": "Iju‐Ishaga",
+               "id": 823
+            },
+            {
+               "name": "Ikeja",
+               "id": 824
+            },
+            {
+               "name": "Ikorodu",
+               "id": 825
+            },
+            {
+               "name": "Ikotun",
+               "id": 826
+            },
+            {
+               "name": "Ikoyi",
+               "id": 827
+            },
+            {
+               "name": "Ipaja",
+               "id": 828
+            },
+            {
+               "name": "Isolo",
+               "id": 829
+            },
+            {
+               "name": "Itire",
+               "id": 830
+            },
+            {
+               "name": "Iyana‐Ipaja",
+               "id": 831
+            },
+            {
+               "name": "Ketu",
+               "id": 832
+            },
+            {
+               "name": "Lagos",
+               "id": 833
+            },
+            {
+               "name": "Lekki",
+               "id": 834
+            },
+            {
+               "name": "Magodo",
+               "id": 835
+            },
+            {
+               "name": "Makoko",
+               "id": 836
+            },
+            {
+               "name": "Marina",
+               "id": 837
+            },
+            {
+               "name": "Mary-Land",
+               "id": 838
+            },
+            {
+               "name": "Meiran",
+               "id": 839
+            },
+            {
+               "name": "Mushin",
+               "id": 840
+            },
+            {
+               "name": "Obalende",
+               "id": 841
+            },
+            {
+               "name": "Ogba",
+               "id": 842
+            },
+            {
+               "name": "Ogba‐Ijaiye",
+               "id": 843
+            },
+            {
+               "name": "Ojo",
+               "id": 844
+            },
+            {
+               "name": "Ojudu",
+               "id": 845
+            },
+            {
+               "name": "Oko-Oba",
+               "id": 846
+            },
+            {
+               "name": "Olowora",
+               "id": 847
+            },
+            {
+               "name": "Orile",
+               "id": 848
+            },
+            {
+               "name": "Oshodi",
+               "id": 849
+            },
+            {
+               "name": "Oworo",
+               "id": 850
+            },
+            {
+               "name": "Oworonsoki",
+               "id": 851
+            },
+            {
+               "name": "Palmgrove",
+               "id": 852
+            },
+            {
+               "name": "Shomolu",
+               "id": 853
+            },
+            {
+               "name": "Surulere",
+               "id": 854
+            },
+            {
+               "name": "Victoria-Island",
+               "id": 855
+            }
           ]
        }
     },
