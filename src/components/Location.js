@@ -12,7 +12,10 @@ class Location extends Component {
             state: '',
             index: 0
         },
-        locals: []
+        locale: {
+            locals: [],
+            area: ''
+        }
     };
 
     componentDidMount(){
@@ -22,13 +25,28 @@ class Location extends Component {
     setProvince(state, index) {
         this.setState({
             province: {state, index},
-            locals: locations[index].states.locals
+            locale: {
+                locals: locations[index].states.locals,
+                area: index !== 0 ? locations[index].states.locals[0].name : null
+            }
         });
+    }
+
+    setArea(area){
+        this.setState({
+            ...this.state,
+            locale: {
+                ...this.state.locale,
+                area
+            }
+        })
     }
     
     render(){
-        const { locals, province } = this.state;
+        const { locale: {locals, area}, province } = this.state;
         const { address, suburb } = this.props;
+
+        console.log(area);
 
         return(
             <View style={{padding: 10}}>
@@ -40,7 +58,7 @@ class Location extends Component {
 
                 <View style={styles.pickerContainer}>
                     <Picker
-                        selectedValue={province}
+                        selectedValue={province.state}
                         style={{ height: 50, width: 150 }}
                         onValueChange={(itemValue, itemIndex) => this.setProvince(itemValue, itemIndex)}
                     >
@@ -58,9 +76,9 @@ class Location extends Component {
                     {
                         locals.length > 0 ?
                         <Picker
-                            selectedValue={province}
+                            selectedValue={area}
                             style={{ height: 50, width: 150 }}
-                            onValueChange={(itemValue, itemIndex) => this.setProvince(itemValue, itemIndex)}
+                            onValueChange={itemValue => this.setArea(itemValue)}
                         >
                             {
                                 locals.map(item => (

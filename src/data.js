@@ -1,4 +1,13 @@
 export const locations = [
+   //The first object is a dummy object to display an
+   //instruction to the
+    {
+       "states":{
+          "name":"Select State",
+          "id":0,
+          "locals":[]
+       }
+    },
     {
        "states":{
           "name":"Abia State",

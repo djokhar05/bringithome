@@ -1,19 +1,27 @@
 import React from 'react';
-import { Card, Image } from 'react-native-elements';
-import { View, Text, StyleSheet } from 'react-native';
+import { Card, Image, Text } from 'react-native-elements';
+import { View, StyleSheet } from 'react-native';
 
 
 const StoreLabel = () => {
+    const { 
+        storeStyles, storeImageStylesContainer, 
+        storeImageStyles, storeTextStyles, boldText
+    } = styles
     return(
         <Card containerStyle={styles.containerStyle}>
-            <View style={styles.storeStyles}>   
-                <Image
-                    style={styles.storeImageStyles}
-                    source={{ uri: 'https://pbs.twimg.com/profile_images/1255807561057656833/BADshgW3_400x400.jpg'}}
-                />
-                <View style={styles.storeTextStyles}>
-                    <Text style={styles.boldText}> Sweet Sensation</Text>
-                    <Text> 04 Martins Street, Oja Oba, Abule Egba, Lagos, Nigeria</Text>
+            <View style={storeStyles}>
+                <View style={storeImageStylesContainer}>
+                    <Image
+                        resizeMode="contain"
+                        style={storeImageStyles}
+                        source={{ uri: 'https://pbs.twimg.com/profile_images/1255807561057656833/BADshgW3_400x400.jpg'}}
+                    />
+                </View>
+
+                <View style={storeTextStyles}>
+                    <Text h4> Sweet Sensation</Text>
+                    <Text style={{alignItems: 'flex-end'}}> 04 Martins Street, Oja Oba, Abule Egba, Lagos, Nigeria</Text>
                     <Text> 0 (904) 564 534, 0 (904) 564 534, </Text>
                 </View>
             </View>
@@ -24,16 +32,17 @@ const StoreLabel = () => {
 const styles = StyleSheet.create({
     storeStyles:{
         flexDirection: 'row',
-        width: '100%',
     },
-    storeImageStyles: {
-        height: 100,
-        width: 100,
-        paddingRight: 30
+    storeImageStylesContainer:{
+        flex: 0.7,
+        justifyContent: 'center',
+        alignContent: 'center'
     },
-    storeTextStyles: {
-        flexShrink: 1,
-        justifyContent: 'center'
+    storeImageStyles:{
+        height: 80,
+    },
+    storeTextStyles:{
+        flex: 2.3,
     },
     boldText: {
         fontWeight: 'bold',
@@ -42,7 +51,7 @@ const styles = StyleSheet.create({
     containerStyle: {
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 5},
-        elevation: 5
+        elevation: 5,
     }
 })
 

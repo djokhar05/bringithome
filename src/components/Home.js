@@ -18,7 +18,6 @@ class Home extends Component {
         this.updateSearch = this.updateSearch.bind(this);
     }
     
-    
     updateSearch(foodSearch){
         this.setState({ foodSearch })
     }
