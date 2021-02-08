@@ -3,7 +3,7 @@ import { Card, Image, Text } from 'react-native-elements';
 import { View, StyleSheet } from 'react-native';
 
 
-const StoreLabel = () => {
+const StoreLabel = ({ storename, storeaddress, storenumbers }) => {
     const { 
         storeStyles, storeImageStylesContainer, 
         storeImageStyles, storeTextStyles, boldText
@@ -20,9 +20,9 @@ const StoreLabel = () => {
                 </View>
 
                 <View style={storeTextStyles}>
-                    <Text h4> Sweet Sensation</Text>
-                    <Text style={{alignItems: 'flex-end'}}> 04 Martins Street, Oja Oba, Abule Egba, Lagos, Nigeria</Text>
-                    <Text> 0 (904) 564 534, 0 (904) 564 534, </Text>
+                    <Text h4> {storename} </Text>
+                    <Text> {storeaddress.suite, storeaddress.street, storeaddress.city} </Text>
+                    <Text> {storenumbers.toString()} </Text>
                 </View>
             </View>
         </Card>

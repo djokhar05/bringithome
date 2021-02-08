@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Location from './Location';
-import { Actions } from 'react-native-router-flux';
-import StoreLabel from './StoreLabel';
-import { RouterLink } from './common';
+import StoreList from './StoreList';
 
 
 class Home extends Component {
@@ -26,7 +24,7 @@ class Home extends Component {
         const { foodSearch } = this.state;
 
         return(
-            <View>
+            <View style={{flex: 1}}>
                 <SearchBar
                     placeholder="Search for food ..."
                     onChangeText={this.updateSearch}
@@ -37,10 +35,8 @@ class Home extends Component {
                 />
 
                 <Location />
-
-                <RouterLink onPress={() => Actions.push("StoreOffers",{})}>
-                    <StoreLabel />
-                </RouterLink>
+                
+                <StoreList />
 
             </View>
         )

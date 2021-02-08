@@ -4,10 +4,20 @@ import StoreLabel from './StoreLabel';
 
 
 class StoreOffers extends Component{
+    constructor(props){
+        super(props);
+    }
+
     render(){
+        const { item } = this.props;
+
         return(
             <View>
-                <StoreLabel />
+                <StoreLabel
+                    storename={item.company.name}
+                    storeaddress={item.address}
+                    storenumbers={item.phone}
+                />
             </View>
         )
     }

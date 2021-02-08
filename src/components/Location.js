@@ -19,7 +19,7 @@ class Location extends Component {
     };
 
     componentDidMount(){
-        seekLocationPermission();
+        //seekLocationPermission();
     }
 
     setProvince(state, index) {
@@ -51,10 +51,10 @@ class Location extends Component {
         return(
             <View style={{padding: 10}}>
 
-                <View>
+                {/* <View>
                     <Text> Your Address is: {address} </Text>
                     <Text> Is your suburb {suburb} ? </Text>
-                </View>
+                </View> */}
 
                 <View style={styles.pickerContainer}>
                     <Picker
