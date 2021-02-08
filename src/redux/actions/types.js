@@ -1,0 +1,1 @@
+export const LOCATION_FOUND = 'location_found';
