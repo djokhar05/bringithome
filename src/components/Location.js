@@ -59,7 +59,8 @@ class Location extends Component {
                 <View style={styles.pickerContainer}>
                     <Picker
                         selectedValue={province.state}
-                        style={{ height: 50, width: 150 }}
+                        style={{ height: 44, width: '50%' }}
+                        itemStyle={{height: 44}}
                         onValueChange={(itemValue, itemIndex) => this.setProvince(itemValue, itemIndex)}
                     >
                         {
@@ -77,7 +78,8 @@ class Location extends Component {
                         locals.length > 0 ?
                         <Picker
                             selectedValue={area}
-                            style={{ height: 50, width: 150 }}
+                            style={{ height: 44, width: 150 }}
+                            itemStyle={{height: 44}}
                             onValueChange={itemValue => this.setArea(itemValue)}
                         >
                             {

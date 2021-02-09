@@ -22,7 +22,7 @@ const StoreLabel = ({ storename, storeaddress, storenumbers }) => {
                 <View style={storeTextStyles}>
                     <Text h4> {storename} </Text>
                     <Text> {storeaddress.suite, storeaddress.street, storeaddress.city} </Text>
-                    <Text> {storenumbers.toString()} </Text>
+                    <Text> {storenumbers} </Text>
                 </View>
             </View>
         </Card>
@@ -49,9 +49,10 @@ const styles = StyleSheet.create({
         fontSize: 23
     },
     containerStyle: {
-        shadowColor: '#000',
-        shadowOffset: {width: 0, height: 5},
+        shadowColor: 'gray',
+        shadowOffset: {width: 3, height: 4},
         elevation: 5,
+        borderRadius: 5
     }
 })
 

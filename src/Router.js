@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Scene, Drawer } from 'react-native-router-flux';
+import { Router, Scene, Drawer, Tabs } from 'react-native-router-flux';
 
 import About from './components/About';
 import Contact from './components/Contact';
@@ -28,21 +28,22 @@ const RouterComponent = () => {
                             style={{fontSize: 10}}
                         />
 
-                        <Scene 
-                            key="About" 
-                            component={About}
-                            title="About"
-                        />
-
-                        <Scene 
-                            key="Contact" 
-                            component={Contact}
-                            title="Contact US"
-                        />
                     </Scene>
                </Drawer>
 
+               <Scene 
+                    key="About" 
+                    component={About}
+                    title="About"
+                />
+
                 <Scene 
+                    key="Contact" 
+                    component={Contact}
+                    title="Contact US"
+                />
+
+                <Scene
                     key="StoreOffers" 
                     component={StoreOffers}
                     title="What We Have Available"

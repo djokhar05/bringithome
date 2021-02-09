@@ -25,6 +25,8 @@ class Home extends Component {
 
         return(
             <View style={{flex: 1}}>
+                <Location />
+
                 <SearchBar
                     placeholder="Search for food ..."
                     onChangeText={this.updateSearch}
@@ -33,8 +35,6 @@ class Home extends Component {
                     round
                     searchIcon
                 />
-
-                <Location />
                 
                 <StoreList />
 

@@ -5,15 +5,13 @@ import StoreLabel from './StoreLabel';
 import { stores } from '../data';
 import { RouterLink } from './common';
 import { Actions } from 'react-native-router-flux';
-import { SafeAreaView } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 
 class StoreList extends Component {
     
     renderItem({ item }){
         return (
 
-            <RouterLink onPress={() => Actions.push("StoreOffers",{item})}>   
+            <RouterLink onPress={() => Actions.StoreOffers({item})}>   
                 <StoreLabel
                     storename={item.company.name}
                     storeaddress={item.address}
@@ -29,7 +27,7 @@ class StoreList extends Component {
             <FlatList
                 data={stores}
                 renderItem={this.renderItem}
-                keyExtractor={item=>item.id}
+                keyExtractor={item=>item.id.toString()}
             />
         )
     }
