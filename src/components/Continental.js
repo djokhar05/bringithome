@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import FoodItem from './FoodItem';
 
-const Continental = () => {
+const Continental = ({ continental }) => {
+
+    console.log(continental);
+    
     return (
-        <View>
-            <Text> I am the Continental Dish </Text>
-        </View>
+        <FoodItem foodItems={continental} />
     )
 }
 

@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import FoodItem from './FoodItem';
 
-const Snack = () => {
+const Snack = ({ snack }) => {
+    
     return (
-        <View>
-            <Text> I am the Snack Dish </Text>
-        </View>
+        <FoodItem foodItems={snack} />
     )
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Animated, StyleSheet } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Location from './Location';
@@ -14,6 +14,10 @@ class Home extends Component {
     constructor(props){
         super(props);
         this.updateSearch = this.updateSearch.bind(this);
+    }
+
+    componentDidUpadate(){
+        Animated.spring().start();
     }
     
     updateSearch(foodSearch){

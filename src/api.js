@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL: 'localhost:5000/',
+    baseURL: 'https://710ec5e0dabc.ngrok.io',
     header: {
         'Content-Type': 'application/json'
     }

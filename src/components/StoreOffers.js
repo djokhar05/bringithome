@@ -17,10 +17,11 @@ class StoreOffers extends Component{
     render(){
         const { item } = this.props;
         const Tab = createBottomTabNavigator();
+        
         return(
             <NavigationContainer>
                 <StoreLabel
-                    storename={item.company.name}
+                    storename={item.name}
                     storeaddress={item.address}
                     storenumbers={item.phone}
                 />
@@ -31,9 +32,20 @@ class StoreOffers extends Component{
                         inactiveTintColor: 'gray'
                     }}
                 >
-                    <Tab.Screen name="Local" component={Local} />
-                    <Tab.Screen name="Snack" component={Snack} />
-                    <Tab.Screen name="Continental" component={Continental} />
+                    <Tab.Screen
+                        name="Local"
+                        children={() => <Local local={item.offers.local} />}
+                    />
+
+                    <Tab.Screen
+                        name="Snack"
+                        children={() => <Snack snack={item.offers.snack} />}
+                    />
+                    
+                    <Tab.Screen
+                        name="Continental"
+                        children={() => <Continental continental={item.offers.continental} />}
+                    />
                 </Tab.Navigator>
             </NavigationContainer>
         )

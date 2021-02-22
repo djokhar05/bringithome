@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import FoodItem from './FoodItem';
 
-const Local = () => {
+const Local = ({ local }) => {
+    
     return (
-        <View>
-            <Text> I am the Local Offer</Text>
-        </View>
+        <FoodItem foodItems={local} />
     )
 }
 

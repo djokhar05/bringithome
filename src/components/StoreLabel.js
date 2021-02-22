@@ -3,7 +3,7 @@ import { Card, Image, Text } from 'react-native-elements';
 import { View, StyleSheet } from 'react-native';
 
 
-const StoreLabel = ({ storename, storeaddress, storenumbers }) => {
+const StoreLabel = ({ storename, storeaddress, storenumbers, storeoffers }) => {
     const { 
         storeStyles, storeImageStylesContainer, 
         storeImageStyles, storeTextStyles, boldText
@@ -21,8 +21,8 @@ const StoreLabel = ({ storename, storeaddress, storenumbers }) => {
 
                 <View style={storeTextStyles}>
                     <Text h4> {storename} </Text>
-                    <Text> {storeaddress.suite, storeaddress.street, storeaddress.city} </Text>
-                    <Text> {storenumbers} </Text>
+                    <Text> {storeaddress.street, storeaddress.area, storeaddress.busStop} </Text>
+                    <Text> {storenumbers.map(num => <Text key={num}> {num}, </Text>)} </Text>
                 </View>
             </View>
         </Card>
