@@ -24,6 +24,7 @@ class StoreOffers extends Component{
                     storename={item.name}
                     storeaddress={item.address}
                     storenumbers={item.phone}
+                    storeimage={item.image}
                 />
 
                 <Tab.Navigator

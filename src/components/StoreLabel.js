@@ -3,7 +3,7 @@ import { Card, Image, Text } from 'react-native-elements';
 import { View, StyleSheet } from 'react-native';
 
 
-const StoreLabel = ({ storename, storeaddress, storenumbers, storeoffers }) => {
+const StoreLabel = ({ storename, storeaddress, storenumbers, storeoffers, storeimage }) => {
     const { 
         storeStyles, storeImageStylesContainer, 
         storeImageStyles, storeTextStyles, boldText
@@ -15,7 +15,7 @@ const StoreLabel = ({ storename, storeaddress, storenumbers, storeoffers }) => {
                     <Image
                         resizeMode="contain"
                         style={storeImageStyles}
-                        source={{ uri: 'https://pbs.twimg.com/profile_images/1255807561057656833/BADshgW3_400x400.jpg'}}
+                        source={{ uri: storeimage}}
                     />
                 </View>
 

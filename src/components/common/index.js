@@ -7,3 +7,4 @@ export * from './Spinner';
 export * from './Confirm';
 export * from './RouterLink';
 export * from './Animation';
+export * from './Pagination';

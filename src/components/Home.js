@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Location from './Location';
 import StoreList from './StoreList';
 
-
 class Home extends Component {
     state = { 
         foodSearch: ''
@@ -14,10 +13,6 @@ class Home extends Component {
     constructor(props){
         super(props);
         this.updateSearch = this.updateSearch.bind(this);
-    }
-
-    componentDidUpadate(){
-        Animated.spring().start();
     }
     
     updateSearch(foodSearch){

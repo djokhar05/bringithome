@@ -8,8 +8,32 @@ import { getStores } from '../redux/actions/storesAction';
 
 class StoreList extends Component {
 
+    state = { 
+        foodSearch: '',
+        limit: 6,
+        loading: true,
+        loadExtraData: false
+    };
+
+    constructor(props){
+        super(props);
+        this.loadMoreStores = this.loadMoreStores.bind(this);
+    }
+
     componentDidMount(){
-        this.props.getStores();
+        this.props.getStores(
+            false,
+            this.props.page, 
+            this.state.limit
+        );
+    }
+
+    loadMoreStores(){
+        this.props.getStores(
+            true,
+            this.props.page,
+            this.state.limit
+        );
     }
     
     renderItem({ item }){
@@ -21,6 +45,7 @@ class StoreList extends Component {
                     storeaddress={item.address}
                     storenumbers={item.phone}
                     storeoffers={item.offers}
+                    storeimage={item.image}
                 />
             </RouterLink>
         )
@@ -34,13 +59,19 @@ class StoreList extends Component {
                 data={stores}
                 renderItem={this.renderItem}
                 keyExtractor={item=>item._id.toString()}
+                onEndReachedThreshold={0}
+                onEndReached={this.loadMoreStores}
             />
         )
     }
 }
 
 const mapStateToProps = state => {
-    return {stores: state.stores}
+    //console.log(state.stores.page);
+    return {
+        page: state.stores.page,
+        stores: state.stores
+    }
 }
 
 export default connect(mapStateToProps, {getStores})(StoreList);
