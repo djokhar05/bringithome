@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Image, Text } from 'react-native-elements';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Linking, TouchableOpacity } from 'react-native';
 
 
 const StoreLabel = ({ storename, storeaddress, storenumbers, storeoffers, storeimage }) => {
@@ -21,8 +21,20 @@ const StoreLabel = ({ storename, storeaddress, storenumbers, storeoffers, storei
 
                 <View style={storeTextStyles}>
                     <Text h4> {storename} </Text>
-                    <Text> {storeaddress.street, storeaddress.area, storeaddress.busStop} </Text>
-                    <Text> {storenumbers.map(num => <Text key={num}> {num}, </Text>)} </Text>
+                    <Text style={{marginTop: 5}}> {storeaddress.street, storeaddress.area, storeaddress.busStop} </Text>
+                    <Text style={{marginLeft: 5, marginTop: 10}}>
+                        {
+                            storenumbers.map(
+                                num => <TouchableOpacity key={num}>
+                                    <Text
+                                        onPress={() => {Linking.openURL(`tel:${num}`)}}
+                                    >
+                                        {num}, 
+                                    </Text>
+                                    </TouchableOpacity>
+                                )
+                        }
+                    </Text>
                 </View>
             </View>
         </Card>
