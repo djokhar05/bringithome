@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { seekLocationPermission } from  '../helpers/getLocation';
+//import { seekLocationPermission } from  '../helpers/getLocation';
 import { connect } from 'react-redux';
 import { locations } from '../data';
 import { Picker } from '@react-native-picker/picker';
+import { sortStores, processing } from '../redux/actions/storesAction';
 
 class Location extends Component {
-    state = { 
+    state = {
         locationGetError: '',
         province: {
             state: '',
@@ -18,13 +19,40 @@ class Location extends Component {
         }
     };
 
+
     componentDidMount(){
         //seekLocationPermission();
     }
 
     setProvince(state, index) {
+        //We have to remove the "State word" from the incoming state
+        //Before sending it to the server to sort
+        //Because the states are saved in the database without
+        //the "State" word.
+        let selectedState = state; //keep the original state untouched
+
+        let stateArr = state.split(" ");    //Split into array
+        stateArr.splice(-1, 1);  //remove the state from the end of the word
+
+        //join the words back adding a comma between them and remove
+        //trailing white spaces
+        state = stateArr.join(" ").trim();
+
+        this.props.processing();
+        this.props.sortStores(
+            false,
+            1,
+            6,
+            {
+                old: this.props.sortParams,
+                new: { key: "state", value: state }
+            }
+        );
+
+        //console.log("Sorting...");
+
         this.setState({
-            province: {state, index},
+            province: {state: selectedState, index},
             locale: {
                 locals: locations[index].states.locals,
                 area: index !== 0 ? locations[index].states.locals[0].name : null
@@ -33,6 +61,17 @@ class Location extends Component {
     }
 
     setArea(area){
+        this.props.processing();
+        this.props.sortStores(
+            false,
+            1,
+            6,
+            {
+                old: this.props.sortParams,
+                new: { key: "area", value: area }
+            }
+        );
+
         this.setState({
             ...this.state,
             locale: {
@@ -41,12 +80,12 @@ class Location extends Component {
             }
         })
     }
-    
+
     render(){
         const { locale: {locals, area}, province } = this.state;
         const { address, suburb } = this.props;
 
-        console.log(area);
+        //console.log(area);
 
         return(
             <View style={{padding: 10}}>
@@ -96,7 +135,7 @@ class Location extends Component {
                     }
                 </View>
 
-                
+
             </View>
         )
     }
@@ -110,7 +149,12 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     const { address, suburb } = state.location.place;
-    return{address, suburb};
+    const { sortParams } = state.stores;
+
+    return {address, suburb, sortParams};
 }
 
-export default connect(mapStateToProps)(Location);
+export default connect(
+    mapStateToProps,
+    {sortStores, processing}
+)(Location);

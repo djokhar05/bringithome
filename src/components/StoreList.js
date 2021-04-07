@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import React, { PureComponent } from 'react';
+import { FlatList, Text, View, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import StoreLabel from './StoreLabel';
 import { RouterLink, Spinner } from './common';
 import { Actions } from 'react-native-router-flux';
-import { getStores, processing } from '../redux/actions/storesAction';
+import { getStores, sortStores } from '../redux/actions/storesAction';
 
-class StoreList extends Component {
+class StoreList extends PureComponent {
 
-    state = { 
+    state = {
         foodSearch: '',
         limit: 6,
         loadExtraData: false
@@ -20,32 +20,47 @@ class StoreList extends Component {
     }
 
     componentDidMount(){
+        //console.log("I have mounted");
         this.props.getStores(
             false,
-            this.props.page, 
-            this.state.limit
-        );
-    }
-
-    loadMoreStores(){
-        //this.props.processing();
-        this.props.getStores(
-            true,
             this.props.page,
             this.state.limit
         );
     }
 
+    loadMoreStores(){
+
+        if(this.props.hasMoreToLoad){
+          if(this.props.sorting == false){
+              this.props.getStores(
+                  true,
+                  this.props.page,
+                  this.state.limit
+              );
+          } else {
+              this.props.sortStores(
+                  true,
+                  this.props.page,
+                  this.state.limit,
+                  {
+                      old: this.props.sortParams
+                  }
+              );
+          }
+        }
+    }
+
     renderFooter(){
         //console.log(`RENDER FOOTER: ${this.props.loading}`);
-        return this.props.loading == true ? 
+        return this.props.loading == true ?
             <Spinner /> : null
+        // return <Spinner />
     }
-    
+
     renderItem({ item }){
         return (
 
-            <RouterLink onPress={() => Actions.StoreOffers({item})}>   
+            <RouterLink onPress={() => Actions.StoreOffers({item})}>
                 <StoreLabel
                     storename={item.name}
                     storeaddress={item.address}
@@ -56,33 +71,64 @@ class StoreList extends Component {
             </RouterLink>
         )
     }
-    
+
     render(){
+
+        //There's a bug with flatlist onEndReached Properties
+        //it calls the onEndReached function on mount
+        //so to avoid this bug, grab the device's height
+        // and set the view style to flex: 1, height: height
+        const { height } = Dimensions.get('window');
         const { stores } = this.props.stores;
-        
+
         return(
-             <FlatList
-                data={stores}
-                renderItem={this.renderItem}
-                keyExtractor={item=>item._id.toString()}
-                onEndReachedThreshold={0}
-                onEndReached={this.loadMoreStores}
-                ListFooterComponent={this.renderFooter.bind(this)}
-            />
+            <View style={{flex: 1, height: height}}>
+                {this.props.rootLoading ?
+                    <Spinner /> :
+                    <FlatList
+                        data={stores}
+                        renderItem={this.renderItem}
+                        keyExtractor={item=>item._id.toString()}
+                        onEndReachedThreshold={.6}
+                        onEndReached={this.loadMoreStores}
+                        ListFooterComponent={this.renderFooter.bind(this)}
+                    />
+                }
+                {
+                  this.props.stores.stores.length < 1 ?
+                  <Text
+                    style={{
+                      position: 'absolute',
+                      top: '5%',
+                      left: 20,
+                      fontSize: 30,
+                      fontWeight: 'bold',
+                      color: 'gray'
+                    }}>
+                      No Stores Found Yet
+                  </Text>:null
+                }
+            </View>
         )
     }
 }
 
 const mapStateToProps = state => {
-    //console.log(`Loading is ${state.stores.loading}`);
+
+    //console.log(state.stores.page);
+
     return {
         page: state.stores.page,
         stores: state.stores,
-        loading: state.stores.loading
+        loading: state.stores.loading,
+        rootLoading: state.stores.rootLoading,
+        sorting: state.stores.sorting,
+        sortParams: state.stores.sortParams,
+        hasMoreToLoad: state.stores.hasMoreToLoad
     }
 }
 
 export default connect(
     mapStateToProps,
-    {getStores, processing}
+    {getStores, sortStores}
 )(StoreList);

@@ -10,6 +10,8 @@ target 'bringithome' do
 
   pod 'react-native-geolocation-service', :path => '../node_modules/react-native-geolocation-service'
 
+  pod 'react-native-restart', :path => '../node_modules/react-native-restart'
+
   target 'bringithomeTests' do
     inherit! :complete
     # Pods for testing

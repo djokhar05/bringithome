@@ -6,7 +6,7 @@ import Location from './Location';
 import StoreList from './StoreList';
 
 class Home extends Component {
-    state = { 
+    state = {
         foodSearch: ''
     };
 
@@ -14,11 +14,11 @@ class Home extends Component {
         super(props);
         this.updateSearch = this.updateSearch.bind(this);
     }
-    
+
     updateSearch(foodSearch){
         this.setState({ foodSearch })
     }
-    
+
     render(){
         const { foodSearch } = this.state;
 
@@ -34,7 +34,7 @@ class Home extends Component {
                     round
                     searchIcon
                 />
-                
+
                 <StoreList />
 
             </View>
