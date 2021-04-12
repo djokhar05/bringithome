@@ -42,7 +42,7 @@ class Location extends Component {
         this.props.sortStores(
             false,
             1,
-            6,
+            10,
             {
                 old: this.props.sortParams,
                 new: { key: "state", value: state }
@@ -65,7 +65,7 @@ class Location extends Component {
         this.props.sortStores(
             false,
             1,
-            6,
+            10,
             {
                 old: this.props.sortParams,
                 new: { key: "area", value: area }

@@ -10,7 +10,7 @@ class StoreList extends PureComponent {
 
     state = {
         foodSearch: '',
-        limit: 6,
+        limit: 10,
         loadExtraData: false
     };
 

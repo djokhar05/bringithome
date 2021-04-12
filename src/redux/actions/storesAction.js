@@ -1,18 +1,6 @@
 import { GET_STORES, PROCESSING, SORT_STORES, STOP_LOADING, MORE_DATA, NO_MORE_DATA } from './types';
 import api from '../../api';
-
-String.prototype.replaceAt=function(index, char) {
-    var a = this.split("");
-    a[index] = char;
-    return a.join("");
-}
-
-const changeStrVal = (strToChange, newStrValue, strToChangeValue) => {
-  let oldString = strToChange;    //copy the original string first
-  let stringIndex = oldString.indexOf(strToChangeValue);  // Grab the strToChangeValue index
-  let modifiedString = oldString.replaceAt(stringIndex+5, newStrValue)
-  return modifiedString;
-}
+import { changeStrVal } from '../../helpers/generalModule';
 
 
 export const processing = () => ({
