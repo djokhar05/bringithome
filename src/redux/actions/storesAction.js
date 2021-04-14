@@ -137,3 +137,7 @@ export const sortStores = (incrementPage=false, page, limit, params) => async di
         console.log(err);
     }
 }
+
+export const foodSort = (incrementPage=false, page, limit, params) => async dispatch => {
+    console.log(`I'm now submitting ${params}`);
+}

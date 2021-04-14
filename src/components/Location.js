@@ -42,7 +42,7 @@ class Location extends Component {
         this.props.sortStores(
             false,
             1,
-            6,
+            this.props.limit,
             {
                 old: this.props.sortParams,
                 new: { key: "state", value: state }
@@ -65,7 +65,7 @@ class Location extends Component {
         this.props.sortStores(
             false,
             1,
-            6,
+            this.props.limit,
             {
                 old: this.props.sortParams,
                 new: { key: "area", value: area }
@@ -149,9 +149,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     const { address, suburb } = state.location.place;
-    const { sortParams } = state.stores;
+    const { limit, sortParams } = state.stores;
 
-    return {address, suburb, sortParams};
+    return {address, suburb, sortParams, limit};
 }
 
 export default connect(

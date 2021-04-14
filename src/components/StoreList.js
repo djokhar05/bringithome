@@ -8,12 +8,6 @@ import { getStores, sortStores } from '../redux/actions/storesAction';
 
 class StoreList extends PureComponent {
 
-    state = {
-        foodSearch: '',
-        limit: 6,
-        loadExtraData: false
-    };
-
     constructor(props){
         super(props);
         this.loadMoreStores = this.loadMoreStores.bind(this);
@@ -24,7 +18,7 @@ class StoreList extends PureComponent {
         this.props.getStores(
             false,
             this.props.page,
-            this.state.limit
+            this.props.limit
         );
     }
 
@@ -35,13 +29,13 @@ class StoreList extends PureComponent {
               this.props.getStores(
                   true,
                   this.props.page,
-                  this.state.limit
+                  this.props.limit
               );
           } else {
               this.props.sortStores(
                   true,
                   this.props.page,
-                  this.state.limit,
+                  this.props.limit,
                   {
                       old: this.props.sortParams
                   }
@@ -124,7 +118,8 @@ const mapStateToProps = state => {
         rootLoading: state.stores.rootLoading,
         sorting: state.stores.sorting,
         sortParams: state.stores.sortParams,
-        hasMoreToLoad: state.stores.hasMoreToLoad
+        hasMoreToLoad: state.stores.hasMoreToLoad,
+        limit: state.stores.limit
     }
 }
 

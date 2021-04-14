@@ -7,7 +7,8 @@ const INITIAL_STATE = {
     sortParams: `?`,
     sorting: false,
     rootLoading: true,
-    hasMoreToLoad: true
+    hasMoreToLoad: true,
+    limit: 10
 }
 
 export default (state=INITIAL_STATE, action) => {
@@ -21,6 +22,7 @@ export default (state=INITIAL_STATE, action) => {
         case GET_STORES:
           //console.log(action.payload.stores)
           if(action.payload.page == 1){
+            state.stores = [];
             return {
               ...state,
               stores: action.payload.stores,
