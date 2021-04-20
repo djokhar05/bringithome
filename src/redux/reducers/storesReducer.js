@@ -47,6 +47,7 @@ export default (state=INITIAL_STATE, action) => {
               page: action.payload.page,
               sorting: true, rootLoading: false
           }
+        
 
         case PROCESSING:
           return { ...state, rootLoading: true, loading: true }

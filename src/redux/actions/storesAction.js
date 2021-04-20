@@ -1,5 +1,6 @@
 import { GET_STORES, PROCESSING, SORT_STORES, STOP_LOADING, MORE_DATA, NO_MORE_DATA } from './types';
 import api from '../../api';
+import { errorFound , clearError} from '../actions/errorActions';
 
 String.prototype.replaceAt=function(index, char) {
     var a = this.split("");
@@ -105,7 +106,7 @@ export const sortStores = (incrementPage=false, page, limit, params) => async di
         );
         const sortedStores = response.data.stores;
 
-        if(sortedStores.length < 1){
+        if(sortedStores.length < 1 || sortedStores.length < limit){
             dispatch({
                 type: STOP_LOADING
             });
@@ -119,14 +120,14 @@ export const sortStores = (incrementPage=false, page, limit, params) => async di
         } else {
             //Chceck if the return result is no longer up to
             //the required limit, then stop loading
-            if(sortedStores.length < limit){
-                dispatch({
-                    type: STOP_LOADING
-                })
-                dispatch({
-                  type: NO_MORE_DATA
-                })
-            }
+            // if(sortedStores.length < limit){
+            //     dispatch({
+            //         type: STOP_LOADING
+            //     })
+            //     dispatch({
+            //       type: NO_MORE_DATA
+            //     })
+            // }
             dispatch({
                 type: SORT_STORES,
                 payload: {sortString, sortedStores, page}
@@ -138,6 +139,52 @@ export const sortStores = (incrementPage=false, page, limit, params) => async di
     }
 }
 
-export const foodSort = (incrementPage=false, page, limit, params) => async dispatch => {
-    console.log(`I'm now submitting ${params}`);
+export const foodSort = (page, sortString, value) => async dispatch => {
+
+    console.log(sortString);
+
+    if(sortString == '?'){
+        //Because you don't want to return random stores scattered all over the state
+        //you have to select at least a state(location) to be returned only stores from
+        //that area
+        dispatch(errorFound("You have to select a state at least."))
+    } else {
+        dispatch(clearError());
+
+        try {
+            const response = await api.get(
+                `/foodSort/${sortString}&value=${value}`
+            );
+
+            sortedStores = response.data.stores;
+
+            //Grab the limit from the sortString
+            let limitIndex = sortString.search("page=")
+            let limit = sortString.slice(limitIndex+6, limitIndex+8)
+
+
+            if(sortedStores.length < 1 || sortedStores.length < limit){
+                dispatch({
+                    type: STOP_LOADING
+                });
+                dispatch({
+                    type: SORT_STORES,
+                    payload: {sortString, sortedStores, page}
+                });
+                dispatch({
+                  type: NO_MORE_DATA
+                })
+            } else {
+                dispatch({
+                    type: SORT_STORES,
+                    payload: {sortString, sortedStores, page}
+                })
+            }
+
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
 }

@@ -6,3 +6,5 @@ export const PROCESSING = 'processing';
 export const STOP_LOADING = 'stop_loading';
 export const NO_MORE_DATA = "no_more_data";
 export const MORE_DATA = "more_data";
+export const ERROR_FOUND = "error_found";
+export const CLEAR_ERROR = "clear_error";
