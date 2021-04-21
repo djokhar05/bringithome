@@ -9,10 +9,10 @@ String.prototype.replaceAt=function(index, char) {
 }
 
 const changeStrVal = (strToChange, newStrValue, strToChangeValue) => {
-  let oldString = strToChange;    //copy the original string first
-  let stringIndex = oldString.indexOf(strToChangeValue);  // Grab the strToChangeValue index
-  let modifiedString = oldString.replaceAt(stringIndex+5, newStrValue)
-  return modifiedString;
+    let oldString = strToChange;    //copy the original string first
+    let stringIndex = oldString.indexOf(strToChangeValue);  // Grab the strToChangeValue index
+    let modifiedString = oldString.replaceAt(stringIndex+5, newStrValue)
+    return modifiedString;
 }
 
 
@@ -139,9 +139,21 @@ export const sortStores = (incrementPage=false, page, limit, params) => async di
     }
 }
 
-export const foodSort = (page, sortString, value) => async dispatch => {
+export const foodSort = (incrementPage=false, page, sortString, value) => async dispatch => {
 
-    console.log(sortString);
+    //setsome sortfing food flags
+    sortingFood = true;
+    var food = value;
+    //console.log(sortString);
+
+    if (incrementPage == false){
+        sortString = changeStrVal(sortString, page, 'page');   
+    } else {
+        page += 1;
+        sortString = changeStrVal(sortString, page, 'page');
+    }
+
+    //console.log(sortString);
 
     if(sortString == '?'){
         //Because you don't want to return random stores scattered all over the state
@@ -152,6 +164,9 @@ export const foodSort = (page, sortString, value) => async dispatch => {
         dispatch(clearError());
 
         try {
+            dispatch({
+              type: MORE_DATA
+            })
             const response = await api.get(
                 `/foodSort/${sortString}&value=${value}`
             );
@@ -169,7 +184,7 @@ export const foodSort = (page, sortString, value) => async dispatch => {
                 });
                 dispatch({
                     type: SORT_STORES,
-                    payload: {sortString, sortedStores, page}
+                    payload: {sortString, sortedStores, page, sortingFood, food}
                 });
                 dispatch({
                   type: NO_MORE_DATA
@@ -177,7 +192,7 @@ export const foodSort = (page, sortString, value) => async dispatch => {
             } else {
                 dispatch({
                     type: SORT_STORES,
-                    payload: {sortString, sortedStores, page}
+                    payload: {sortString, sortedStores, page, sortingFood, food}
                 })
             }
 

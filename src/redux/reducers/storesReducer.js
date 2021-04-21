@@ -8,7 +8,9 @@ const INITIAL_STATE = {
     sorting: false,
     rootLoading: true,
     hasMoreToLoad: true,
-    limit: 10
+    limit: 6,
+    sortingFood: false,
+    food: ''
 }
 
 export default (state=INITIAL_STATE, action) => {
@@ -28,7 +30,7 @@ export default (state=INITIAL_STATE, action) => {
               stores: action.payload.stores,
               page: action.payload.page,
               sortParams: `?`,
-              loading: true, rootLoading: false
+              loading: true, rootLoading: false, sortingFood: false
             };
           } else {
               return {
@@ -40,14 +42,26 @@ export default (state=INITIAL_STATE, action) => {
           }
 
         case SORT_STORES:
-          return {
-              ...state,
-              stores: action.payload.sortedStores,
-              sortParams: action.payload.sortString,
-              page: action.payload.page,
-              sorting: true, rootLoading: false
+          if(action.payload.page == 1){
+            return {
+                ...state,
+                stores: action.payload.sortedStores,
+                sortParams: action.payload.sortString,
+                page: action.payload.page,
+                sorting: action.payload.sortingFood == undefined ? true : false, rootLoading: false,
+                sortingFood: action.payload.sortingFood == undefined ? false : true,
+                food: action.payload.food == undefined ? '' : action.payload.food
+            }
+          } else {
+            return {
+                  ...state,
+                  stores: [ ...state.stores, ...action.payload.sortedStores],
+                  sortParams: action.payload.sortString,
+                  page: action.payload.page,
+                  sorting: true, rootLoading: false
+              }
           }
-        
+
 
         case PROCESSING:
           return { ...state, rootLoading: true, loading: true }

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import StoreLabel from './StoreLabel';
 import { RouterLink, Spinner } from './common';
 import { Actions } from 'react-native-router-flux';
-import { getStores, sortStores } from '../redux/actions/storesAction';
+import { getStores, sortStores, sortingFood } from '../redux/actions/storesAction';
 
 class StoreList extends PureComponent {
 
@@ -24,24 +24,31 @@ class StoreList extends PureComponent {
 
     loadMoreStores(){
 
-        if(this.props.hasMoreToLoad){
-          if(this.props.sorting == false){
-              this.props.getStores(
-                  true,
-                  this.props.page,
-                  this.props.limit
-              );
-          } else {
-              this.props.sortStores(
-                  true,
-                  this.props.page,
-                  this.props.limit,
-                  {
-                      old: this.props.sortParams
-                  }
-              );
-          }
+      if(this.props.hasMoreToLoad){
+        if(this.props.sorting == false && this.props.sortingFood == false){
+          this.props.getStores(
+            true,
+            this.props.page,
+            this.props.limit
+          );
+        } else if (this.props.sortingFood) {
+          this.props.sortStores(
+            true,
+            this.props.page,
+            this.props.sortParams,
+            this.props.food
+          );
+        } else {
+          this.props.sortStores(
+            true,
+            this.props.page,
+            this.props.limit,
+            {
+                old: this.props.sortParams
+            }
+          );
         }
+      }
     }
 
     renderFooter(){
@@ -109,7 +116,7 @@ class StoreList extends PureComponent {
 
 const mapStateToProps = state => {
 
-    //console.log(state.stores.page);
+    //console.log(state.stores);
 
     return {
         page: state.stores.page,
@@ -119,11 +126,12 @@ const mapStateToProps = state => {
         sorting: state.stores.sorting,
         sortParams: state.stores.sortParams,
         hasMoreToLoad: state.stores.hasMoreToLoad,
-        limit: state.stores.limit
+        limit: state.stores.limit,
+        food: state.stores.food,
     }
 }
 
 export default connect(
     mapStateToProps,
-    {getStores, sortStores}
+    {getStores, sortStores, sortingFood}
 )(StoreList);

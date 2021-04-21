@@ -9,7 +9,7 @@ export default (state=INITIAL_STATE, action) => {
   switch(action.type){
     case ERROR_FOUND:
       return {
-        ...state, error: true, errorMessage: action.payload
+        ...state, error: true, errMessage: action.payload
       }
 
     case CLEAR_ERROR:

@@ -4,22 +4,22 @@ import { foodSort } from '../redux/actions/storesAction';
 import { connect } from 'react-redux';
 import { Text } from 'react-native';
 
-const SearchBar = ({ placeholder, onChangeText, value, foodSort, sortParams, error}) => {
-
+const SearchBar = ({ placeholder, onChangeText, value, foodSort, sortParams, error, errMessage}) => {
+    
 	return(
         <>
             { error &&
                 <Text style={{
                     color: 'red', fontSize: 18, textAlign: 'center', fontWeight: 'bold', padding: 10
                 }} >
-                    You have to select a state first
+                    {errMessage}
                 </Text>
             }
     		<Searchbar
                 placeholder={placeholder}
                 onChangeText={onChangeText}
                 value={value}
-                onSubmit={() => foodSort(1, sortParams, value)}
+                onSubmit={() => foodSort(false, 1, sortParams, value)}
             />
         </>
 	)
@@ -27,7 +27,8 @@ const SearchBar = ({ placeholder, onChangeText, value, foodSort, sortParams, err
 
 const mapStateToProps = state => {
 
-    console.log(state.stores.sortParams);
+
+    const { error, errMessage } = state.errors;
 
     return {
         loading: state.stores.loading,
@@ -35,7 +36,7 @@ const mapStateToProps = state => {
         sorting: state.stores.sorting,
         sortParams: state.stores.sortParams,
         hasMoreToLoad: state.stores.hasMoreToLoad,
-        error: state.errors.error
+        error, errMessage
     };
 }
 
