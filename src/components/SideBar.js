@@ -36,11 +36,13 @@ export default class SideBar extends Component {
                     icon="info"
                 />
 
-                <RouterLink
-                    onPress={() => Actions.Contact()}
-                    Link="Media"
-                    icon="chat"
-                />
+                {
+                    // <RouterLink
+                    //     onPress={() => Actions.Contact()}
+                    //     Link="Media"
+                    //     icon="chat"
+                    // />
+                }
 
 
             </SafeAreaView>

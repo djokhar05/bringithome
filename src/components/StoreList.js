@@ -51,6 +51,8 @@ class StoreList extends PureComponent {
       }
     }
 
+
+
     renderFooter(){
         //console.log(`RENDER FOOTER: ${this.props.loading}`);
         return this.props.loading == true ?
@@ -60,7 +62,6 @@ class StoreList extends PureComponent {
 
     renderItem({ item }){
         return (
-
             <RouterLink onPress={() => Actions.StoreOffers({item})}>
                 <StoreLabel
                     storename={item.name}
@@ -128,6 +129,7 @@ const mapStateToProps = state => {
         hasMoreToLoad: state.stores.hasMoreToLoad,
         limit: state.stores.limit,
         food: state.stores.food,
+        sortingFood: state.stores.sortingFood
     }
 }
 
