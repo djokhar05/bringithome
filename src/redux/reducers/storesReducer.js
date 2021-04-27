@@ -26,8 +26,9 @@ export default (state=INITIAL_STATE, action) => {
           //console.log(action.payload.stores)
           if(action.payload.page == 1){
             state.stores = [];
+
             return {
-              ...state,
+              INITIAL_STATE,
               stores: action.payload.stores,
               page: action.payload.page,
               sortParams: `?`,

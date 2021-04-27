@@ -3,17 +3,35 @@ import {Text, SafeAreaView, View, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { RouterLink } from './common/RouterLink';
 import { NativeModules } from 'react-native';
+import { connect } from 'react-redux';
+import { getStores } from '../redux/actions/storesAction';
 
 const reloadApp = () => NativeModules.DevSettings.reload();
 
-export default class SideBar extends Component {
+class SideBar extends Component {
+
+    constructor(props) {
+      super(props);
+
+      //console.log(props);
+    }
+
+    getStores = () => {
+        this.props.getStores(
+            false,
+            1,
+            10
+        );
+        this.props.navigation.goBack();
+    }
+
     render() {
         return (
             <SafeAreaView style={{backgroundColor:'#D3E3F2', height:'100%'}}>
                 <RouterLink
-                    onPress={reloadApp}
-                    Link="Order"
-                    icon="fastfood"
+                    onPress={this.getStores.bind(this)}
+                    Link="Home"
+                    icon="home"
                 />
 
                 {// <RouterLink
@@ -49,3 +67,8 @@ export default class SideBar extends Component {
         );
     }
 }
+
+
+export default connect(
+    null, {getStores}
+)(SideBar)

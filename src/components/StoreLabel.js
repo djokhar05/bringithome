@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Image, Text } from 'react-native-elements';
-import { View, StyleSheet, Linking, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Linking, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
 
 
 const StoreLabel = ({ storename, storeaddress, storenumbers, storeoffers, storeimage }) => {
@@ -22,16 +22,17 @@ const StoreLabel = ({ storename, storeaddress, storenumbers, storeoffers, storei
                 <View style={storeTextStyles}>
                     <Text h4> {storename} </Text>
                     <Text style={{marginTop: 5}}> {storeaddress.street, storeaddress.area, storeaddress.busStop} </Text>
-                    <Text style={{marginLeft: 5, marginTop: 10}}>
+                    <Text style={{borderColor: '#A8D1DF', borderWidth: 3}}>
                         {
                             storenumbers.map(
-                                num => <TouchableOpacity key={num}>
-                                    <Text
-                                        onPress={() => {Linking.openURL(`tel:${num}`)}}
-                                    >
-                                        {num} &nbsp;
-                                    </Text>
-                                    </TouchableOpacity>
+                                num => <TouchableNativeFeedback onPress={() => Linking.openURL(`tel:${num}`)}
+                                        background={TouchableNativeFeedback.SelectableBackground()}>
+                                            <View style={{width: 'auto', backgroundColor: 'white'}}>
+                                                <Text style={{margin: 10, marginLeft: 3, color: '#117CFE'}}>
+                                                    {num}
+                                                </Text>
+                                            </View>
+                                        </TouchableNativeFeedback>
                                 )
                         }
                     </Text>
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
     },
     storeTextStyles:{
         flex: 2.3,
+        marginLeft: 3
     },
     boldText: {
         fontWeight: 'bold',
