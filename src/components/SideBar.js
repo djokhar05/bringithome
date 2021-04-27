@@ -29,7 +29,7 @@ class SideBar extends Component {
         return (
             <SafeAreaView style={{backgroundColor:'#D3E3F2', height:'100%'}}>
                 <RouterLink
-                    onPress={this.getStores.bind(this)}
+                    onPress={() => Actions.Drawer()}
                     Link="Home"
                     icon="home"
                 />
