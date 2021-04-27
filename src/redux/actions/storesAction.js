@@ -1,4 +1,4 @@
-import { GET_STORES, PROCESSING, SORT_STORES, STOP_LOADING, MORE_DATA, NO_MORE_DATA } from './types';
+import { GET_STORES, PROCESSING, SORT_STORES, STOP_LOADING, MORE_DATA, NO_MORE_DATA, SEARCHING_FOOD } from './types';
 import api from '../../api';
 import { errorFound , clearError} from '../actions/errorActions';
 
@@ -140,18 +140,10 @@ export const sortStores = (incrementPage=false, page, limit, params) => async di
 }
 
 export const foodSort = (incrementPage=false, page, sortString, value) => async dispatch => {
-
+    
     //setsome sortfing food flags
     sortingFood = true;
     var food = value;
-    //console.log(sortString);
-
-    if (incrementPage == false){
-        sortString = changeStrVal(sortString, page, 'page');   
-    } else {
-        page += 1;
-        sortString = changeStrVal(sortString, page, 'page');
-    }
 
     //console.log(sortString);
 
@@ -159,8 +151,22 @@ export const foodSort = (incrementPage=false, page, sortString, value) => async 
         //Because you don't want to return random stores scattered all over the state
         //you have to select at least a state(location) to be returned only stores from
         //that area
-        dispatch(errorFound("You have to select a state at least."))
+
+        dispatch(errorFound("You have to select a state at least."));
+
     } else {
+        dispatch({
+            type: SEARCHING_FOOD
+        });
+
+        if (incrementPage == false){
+            sortString = changeStrVal(sortString, page, 'page');   
+        } else {
+            page += 1;
+            sortString = changeStrVal(sortString, page, 'page');
+        }
+
+
         dispatch(clearError());
 
         try {
@@ -174,9 +180,8 @@ export const foodSort = (incrementPage=false, page, sortString, value) => async 
             sortedStores = response.data.stores;
 
             //Grab the limit from the sortString
-            let limitIndex = sortString.search("page=")
-            let limit = sortString.slice(limitIndex+6, limitIndex+8)
-
+            let limitIndex = sortString.search("limit=");            
+            let limit = sortString[limitIndex+6];
 
             if(sortedStores.length < 1 || sortedStores.length < limit){
                 dispatch({

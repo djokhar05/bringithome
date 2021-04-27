@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.reactnativerestart.RestartPackage;
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;

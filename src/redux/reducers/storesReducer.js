@@ -1,4 +1,4 @@
-import { GET_STORES, STOP_LOADING, SORT_STORES, PROCESSING, NO_MORE_DATA, MORE_DATA } from '../actions/types';
+import { GET_STORES, STOP_LOADING, SORT_STORES, PROCESSING, NO_MORE_DATA, MORE_DATA, SEARCHING_FOOD } from '../actions/types';
 
 const INITIAL_STATE = {
     stores: [],
@@ -10,7 +10,8 @@ const INITIAL_STATE = {
     hasMoreToLoad: true,
     limit: 6,
     sortingFood: false,
-    food: ''
+    food: '',
+    searchingForFood: false
 }
 
 export default (state=INITIAL_STATE, action) => {
@@ -50,7 +51,8 @@ export default (state=INITIAL_STATE, action) => {
                 page: action.payload.page,
                 sorting: action.payload.sortingFood == undefined ? true : false, rootLoading: false,
                 sortingFood: action.payload.sortingFood == undefined ? false : true,
-                food: action.payload.food == undefined ? '' : action.payload.food
+                food: action.payload.food == undefined ? '' : action.payload.food,
+                searchingForFood: false
             }
           } else {
             return {
@@ -62,6 +64,8 @@ export default (state=INITIAL_STATE, action) => {
               }
           }
 
+        case SEARCHING_FOOD:
+          return { ...state, searchingForFood: true }
 
         case PROCESSING:
           return { ...state, rootLoading: true, loading: true }

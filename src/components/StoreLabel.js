@@ -29,7 +29,7 @@ const StoreLabel = ({ storename, storeaddress, storenumbers, storeoffers, storei
                                     <Text
                                         onPress={() => {Linking.openURL(`tel:${num}`)}}
                                     >
-                                        {num}, 
+                                        {num} &nbsp;
                                     </Text>
                                     </TouchableOpacity>
                                 )

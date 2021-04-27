@@ -4,8 +4,8 @@ import { foodSort } from '../redux/actions/storesAction';
 import { connect } from 'react-redux';
 import { Text } from 'react-native';
 
-const SearchBar = ({ placeholder, onChangeText, value, foodSort, sortParams, error, errMessage}) => {
-    
+const SearchBar = ({ placeholder, onChangeText, value, foodSort, sortParams, error, errMessage, searchingForFood}) => {
+
 	return(
         <>
             { error &&
@@ -20,13 +20,13 @@ const SearchBar = ({ placeholder, onChangeText, value, foodSort, sortParams, err
                 onChangeText={onChangeText}
                 value={value}
                 onSubmit={() => foodSort(false, 1, sortParams, value)}
+                loading={searchingForFood}
             />
         </>
 	)
 }
 
 const mapStateToProps = state => {
-
 
     const { error, errMessage } = state.errors;
 
@@ -36,7 +36,8 @@ const mapStateToProps = state => {
         sorting: state.stores.sorting,
         sortParams: state.stores.sortParams,
         hasMoreToLoad: state.stores.hasMoreToLoad,
-        error, errMessage
+        error, errMessage,
+        searchingForFood: state.stores.searchingForFood
     };
 }
 

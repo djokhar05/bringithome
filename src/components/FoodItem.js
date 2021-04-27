@@ -8,17 +8,17 @@ const FoodItem = ({ foodItems }) => {
 
     const { 
         foodListStyles, foodImageStyles, textStyle,
-        foodTextStyles, foodPriceStyles,
+        foodTextStyles, foodPriceStyles, evenStyle
     } = styles;
 
-    const renderFoodItem = ({ item }) => {
+    const renderFoodItem = ({ item, index }) => {
         let priceToNum = parseInt(item.price);
 
-        console.log(typeof priceToNum);
+        
         return(
             <Card>
                 <CardSection>
-                    <View style={foodListStyles}>
+                    <View style={[foodListStyles, index % 2 != 0 ? evenStyle: '']}>
                         <View style={foodImageStyles}>
                             <FadeInView>
                                 <Image
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     foodListStyles: {
         flexDirection: "row",
         flex: 1,
-        fontSize: 30
+        fontSize: 30,
     },
     foodImageStyles: {
         flex: 1
@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
     textStyle: {
         fontSize: 15,
         fontWeight: 'bold'
+    },
+    evenStyle: {
+        backgroundColor: '#A8D1DF'
     }
 })
 

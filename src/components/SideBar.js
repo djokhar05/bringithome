@@ -9,7 +9,7 @@ const reloadApp = () => NativeModules.DevSettings.reload();
 export default class SideBar extends Component {
     render() {
         return (
-            <SafeAreaView style={{backgroundColor:'#fff', height:'100%'}}>
+            <SafeAreaView style={{backgroundColor:'#D3E3F2', height:'100%'}}>
                 <RouterLink
                     onPress={reloadApp}
                     Link="Order"

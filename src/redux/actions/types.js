@@ -8,3 +8,4 @@ export const NO_MORE_DATA = "no_more_data";
 export const MORE_DATA = "more_data";
 export const ERROR_FOUND = "error_found";
 export const CLEAR_ERROR = "clear_error";
+export const SEARCHING_FOOD = "searching_food";

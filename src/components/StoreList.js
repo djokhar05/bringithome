@@ -88,6 +88,7 @@ class StoreList extends PureComponent {
                 {this.props.rootLoading ?
                     <Spinner /> :
                     <FlatList
+                        style={{paddingBottom: 30}}
                         data={stores}
                         renderItem={this.renderItem}
                         keyExtractor={item=>item._id.toString()}

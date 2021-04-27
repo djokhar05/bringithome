@@ -1,8 +1,9 @@
 import React from 'react';
 import { SearchBar } from 'react-native-elements';
+import { Platform } from 'react-native';
 
 
-const Searchbar = ({ placeholder, onChangeText, value, onSubmit }) => {
+const Searchbar = ({ placeholder, onChangeText, value, onSubmit, loading }) => {
   return(
     <SearchBar
         placeholder="Search for food ..."
@@ -14,6 +15,11 @@ const Searchbar = ({ placeholder, onChangeText, value, onSubmit }) => {
         cancelIcon
         showCancel
         onSubmitEditing={onSubmit}
+        showLoading={loading}
+        platform={Platform.OS}
+        loadingProps={{
+            color: 'black'
+        }}
     />
   )
 }

@@ -25,7 +25,7 @@ const RouterComponent = () => {
                             component={Home}
                             title="What Would you like to order today ?"
                             initial
-                            style={{fontSize: 10}}
+                            navigationBarStyle={{ backgroundColor: '#D3E3F2'}}
                         />
 
                     </Scene>
@@ -47,6 +47,7 @@ const RouterComponent = () => {
                     key="StoreOffers" 
                     component={StoreOffers}
                     title="What We Have Available"
+                    navigationBarStyle={{ backgroundColor: '#A8D1DF'}}
                 />
 
 

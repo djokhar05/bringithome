@@ -27,7 +27,7 @@ class Home extends Component {
         const { foodSearch } = this.state;
 
         return(
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, backgroundColor: '#EFF0F1'}}>
                 <Location />
 
                 <SearchBar
