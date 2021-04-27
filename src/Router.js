@@ -66,7 +66,6 @@ const RouterComponent = () => {
                     navigationBarStyle={{ backgroundColor: '#A8D1DF'}}
                 />
 
-
             </Scene>
         </Router>
     )

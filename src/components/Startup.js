@@ -22,7 +22,7 @@ const Startup = () => {
 			<ImageBackground
 				style={{flex: 1}}
 				source={{
-					uri: 'https://s3.gifyu.com/images/BiH.gif',
+					uri: 'https://s3.gifyu.com/images/BiHa6f2356bfa48f553.gif',
 				}}
 			>
 		</ImageBackground>
