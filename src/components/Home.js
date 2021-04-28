@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Animated, StyleSheet } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import SearchBar from './SearchBar';
 import { connect } from 'react-redux';
 import Location from './Location';
 import StoreList from './StoreList';
@@ -19,20 +19,21 @@ class Home extends Component {
         this.setState({ foodSearch })
     }
 
+    searchNow(foodSearch){
+        console.log(foodSearch)
+    }
+
     render(){
         const { foodSearch } = this.state;
 
         return(
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, backgroundColor: '#EFF0F1'}}>
                 <Location />
 
                 <SearchBar
                     placeholder="Search for food ..."
                     onChangeText={this.updateSearch}
                     value={foodSearch}
-                    lightTheme
-                    round
-                    searchIcon
                 />
 
                 <StoreList />

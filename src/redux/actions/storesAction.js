@@ -1,6 +1,19 @@
-import { GET_STORES, PROCESSING, SORT_STORES, STOP_LOADING, MORE_DATA, NO_MORE_DATA } from './types';
+import { GET_STORES, PROCESSING, SORT_STORES, STOP_LOADING, MORE_DATA, NO_MORE_DATA, SEARCHING_FOOD } from './types';
 import api from '../../api';
-import { changeStrVal } from '../../helpers/generalModule';
+import { errorFound , clearError} from '../actions/errorActions';
+
+String.prototype.replaceAt=function(index, char) {
+    var a = this.split("");
+    a[index] = char;
+    return a.join("");
+}
+
+const changeStrVal = (strToChange, newStrValue, strToChangeValue) => {
+    let oldString = strToChange;    //copy the original string first
+    let stringIndex = oldString.indexOf(strToChangeValue);  // Grab the strToChangeValue index
+    let modifiedString = oldString.replaceAt(stringIndex+5, newStrValue)
+    return modifiedString;
+}
 
 
 export const processing = () => ({
@@ -93,7 +106,7 @@ export const sortStores = (incrementPage=false, page, limit, params) => async di
         );
         const sortedStores = response.data.stores;
 
-        if(sortedStores.length < 1){
+        if(sortedStores.length < 1 || sortedStores.length < limit){
             dispatch({
                 type: STOP_LOADING
             });
@@ -107,14 +120,14 @@ export const sortStores = (incrementPage=false, page, limit, params) => async di
         } else {
             //Chceck if the return result is no longer up to
             //the required limit, then stop loading
-            if(sortedStores.length < limit){
-                dispatch({
-                    type: STOP_LOADING
-                })
-                dispatch({
-                  type: NO_MORE_DATA
-                })
-            }
+            // if(sortedStores.length < limit){
+            //     dispatch({
+            //         type: STOP_LOADING
+            //     })
+            //     dispatch({
+            //       type: NO_MORE_DATA
+            //     })
+            // }
             dispatch({
                 type: SORT_STORES,
                 payload: {sortString, sortedStores, page}
@@ -124,4 +137,74 @@ export const sortStores = (incrementPage=false, page, limit, params) => async di
     } catch (err){
         console.log(err);
     }
+}
+
+export const foodSort = (incrementPage=false, page, sortString, value) => async dispatch => {
+    
+    //setsome sortfing food flags
+    sortingFood = true;
+    var food = value;
+
+    //console.log(sortString);
+
+    if(sortString == '?'){
+        //Because you don't want to return random stores scattered all over the state
+        //you have to select at least a state(location) to be returned only stores from
+        //that area
+
+        dispatch(errorFound("You have to select a state at least."));
+
+    } else {
+        dispatch({
+            type: SEARCHING_FOOD
+        });
+
+        if (incrementPage == false){
+            sortString = changeStrVal(sortString, page, 'page');   
+        } else {
+            page += 1;
+            sortString = changeStrVal(sortString, page, 'page');
+        }
+
+
+        dispatch(clearError());
+
+        try {
+            dispatch({
+              type: MORE_DATA
+            })
+            const response = await api.get(
+                `/foodSort/${sortString}&value=${value}`
+            );
+
+            sortedStores = response.data.stores;
+
+            //Grab the limit from the sortString
+            let limitIndex = sortString.search("limit=");            
+            let limit = sortString[limitIndex+6];
+
+            if(sortedStores.length < 1 || sortedStores.length < limit){
+                dispatch({
+                    type: STOP_LOADING
+                });
+                dispatch({
+                    type: SORT_STORES,
+                    payload: {sortString, sortedStores, page, sortingFood, food}
+                });
+                dispatch({
+                  type: NO_MORE_DATA
+                })
+            } else {
+                dispatch({
+                    type: SORT_STORES,
+                    payload: {sortString, sortedStores, page, sortingFood, food}
+                })
+            }
+
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
 }

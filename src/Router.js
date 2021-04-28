@@ -25,7 +25,12 @@ const RouterComponent = () => {
                             component={Home}
                             title="What Would you like to order today ?"
                             initial
-                            style={{fontSize: 10}}
+                            titleStyle={{
+                                fontSize: 17,
+                                fontWeight: 'bold',
+                                fontFamily: 'cursive'
+                            }}
+                            navigationBarStyle={{ backgroundColor: '#D3E3F2'}}
                         />
 
                     </Scene>
@@ -47,6 +52,12 @@ const RouterComponent = () => {
                     key="StoreOffers" 
                     component={StoreOffers}
                     title="What We Have Available"
+                    titleStyle={{
+                        fontSize: 17,
+                        fontWeight: 'bold',
+                        fontFamily: 'cursive'
+                    }}
+                    navigationBarStyle={{ backgroundColor: '#A8D1DF'}}
                 />
 
 

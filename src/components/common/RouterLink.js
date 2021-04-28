@@ -9,7 +9,7 @@ const RouterLink = ({ children, onPress, Link, icon }) => {
         children : 
         <View style={styles.linkStyle}>
             <Text style={styles.linkTextStyle}>{Link}</Text>
-            <Icon name={icon} type="material" color="purple" />
+            <Icon name={icon} type="material" color="#0075FF" />
         </View>
 
     return(

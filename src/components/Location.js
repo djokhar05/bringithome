@@ -16,6 +16,10 @@ class Location extends Component {
         locale: {
             locals: [],
             area: ''
+        },
+        defaultArea: {
+            default: 'Select an area',
+            status: true
         }
     };
 
@@ -25,6 +29,12 @@ class Location extends Component {
     }
 
     setProvince(state, index) {
+        //You have to deduct 1 from the state index, because we added an extra
+        // picker.item manually in the code
+
+        index -= 1
+
+
         //We have to remove the "State word" from the incoming state
         //Before sending it to the server to sort
         //Because the states are saved in the database without
@@ -42,7 +52,7 @@ class Location extends Component {
         this.props.sortStores(
             false,
             1,
-            10,
+            this.props.limit,
             {
                 old: this.props.sortParams,
                 new: { key: "state", value: state }
@@ -50,12 +60,15 @@ class Location extends Component {
         );
 
         //console.log("Sorting...");
-
         this.setState({
             province: {state: selectedState, index},
             locale: {
                 locals: locations[index].states.locals,
                 area: index !== 0 ? locations[index].states.locals[0].name : null
+            },
+            defaultArea: {
+                ...this.state.defaultArea,
+                status: true
             }
         });
     }
@@ -65,7 +78,7 @@ class Location extends Component {
         this.props.sortStores(
             false,
             1,
-            10,
+            this.props.limit,
             {
                 old: this.props.sortParams,
                 new: { key: "area", value: area }
@@ -77,6 +90,10 @@ class Location extends Component {
             locale: {
                 ...this.state.locale,
                 area
+            },
+            defaultArea: {
+                ...this.state.defaultArea,
+                status: false
             }
         })
     }
@@ -102,6 +119,11 @@ class Location extends Component {
                         itemStyle={{height: 44}}
                         onValueChange={(itemValue, itemIndex) => this.setProvince(itemValue, itemIndex)}
                     >
+                        <Picker.Item
+                            key={'unselectable'}
+                            label={'Select a State'}
+                            value={'Select State'}
+                        />
                         {
                             locations.map(item => (
                                 <Picker.Item
@@ -116,11 +138,16 @@ class Location extends Component {
                     {
                         locals.length > 0 ?
                         <Picker
-                            selectedValue={area}
+                            selectedValue={this.state.defaultArea.status == true ? this.state.defaultArea.default : area}
                             style={{ height: 44, width: 150 }}
                             itemStyle={{height: 44}}
                             onValueChange={itemValue => this.setArea(itemValue)}
                         >
+                            <Picker.Item
+                                key={'unselectable'}
+                                label={'Select an area'}
+                                value={'Select Area'}
+                            />
                             {
                                 locals.map(item => (
                                     <Picker.Item
@@ -149,9 +176,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     const { address, suburb } = state.location.place;
-    const { sortParams } = state.stores;
+    const { limit, sortParams } = state.stores;
 
-    return {address, suburb, sortParams};
+    return {address, suburb, sortParams, limit};
 }
 
 export default connect(

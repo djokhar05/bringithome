@@ -4,15 +4,9 @@ import { connect } from 'react-redux';
 import StoreLabel from './StoreLabel';
 import { RouterLink, Spinner } from './common';
 import { Actions } from 'react-native-router-flux';
-import { getStores, sortStores } from '../redux/actions/storesAction';
+import { getStores, sortStores, sortingFood } from '../redux/actions/storesAction';
 
 class StoreList extends PureComponent {
-
-    state = {
-        foodSearch: '',
-        limit: 10,
-        loadExtraData: false
-    };
 
     constructor(props){
         super(props);
@@ -24,31 +18,40 @@ class StoreList extends PureComponent {
         this.props.getStores(
             false,
             this.props.page,
-            this.state.limit
+            this.props.limit
         );
     }
 
     loadMoreStores(){
 
-        if(this.props.hasMoreToLoad){
-          if(this.props.sorting == false){
-              this.props.getStores(
-                  true,
-                  this.props.page,
-                  this.state.limit
-              );
-          } else {
-              this.props.sortStores(
-                  true,
-                  this.props.page,
-                  this.state.limit,
-                  {
-                      old: this.props.sortParams
-                  }
-              );
-          }
+      if(this.props.hasMoreToLoad){
+        if(this.props.sorting == false && this.props.sortingFood == false){
+          this.props.getStores(
+            true,
+            this.props.page,
+            this.props.limit
+          );
+        } else if (this.props.sortingFood) {
+          this.props.sortStores(
+            true,
+            this.props.page,
+            this.props.sortParams,
+            this.props.food
+          );
+        } else {
+          this.props.sortStores(
+            true,
+            this.props.page,
+            this.props.limit,
+            {
+                old: this.props.sortParams
+            }
+          );
         }
+      }
     }
+
+
 
     renderFooter(){
         //console.log(`RENDER FOOTER: ${this.props.loading}`);
@@ -59,7 +62,6 @@ class StoreList extends PureComponent {
 
     renderItem({ item }){
         return (
-
             <RouterLink onPress={() => Actions.StoreOffers({item})}>
                 <StoreLabel
                     storename={item.name}
@@ -86,6 +88,7 @@ class StoreList extends PureComponent {
                 {this.props.rootLoading ?
                     <Spinner /> :
                     <FlatList
+                        style={{paddingBottom: 30}}
                         data={stores}
                         renderItem={this.renderItem}
                         keyExtractor={item=>item._id.toString()}
@@ -115,7 +118,7 @@ class StoreList extends PureComponent {
 
 const mapStateToProps = state => {
 
-    //console.log(state.stores.page);
+    //console.log(state.stores);
 
     return {
         page: state.stores.page,
@@ -124,11 +127,14 @@ const mapStateToProps = state => {
         rootLoading: state.stores.rootLoading,
         sorting: state.stores.sorting,
         sortParams: state.stores.sortParams,
-        hasMoreToLoad: state.stores.hasMoreToLoad
+        hasMoreToLoad: state.stores.hasMoreToLoad,
+        limit: state.stores.limit,
+        food: state.stores.food,
+        sortingFood: state.stores.sortingFood
     }
 }
 
 export default connect(
     mapStateToProps,
-    {getStores, sortStores}
+    {getStores, sortStores, sortingFood}
 )(StoreList);

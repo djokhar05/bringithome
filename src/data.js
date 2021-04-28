@@ -3,13 +3,6 @@ export const locations = [
    //instruction to the
     {
        "states":{
-          "name":"Select State",
-          "id":0,
-          "locals":[]
-       }
-    },
-    {
-       "states":{
           "name":"Abia State",
           "id":1,
           "locals":[
