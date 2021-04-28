@@ -28,7 +28,7 @@ export default (state=INITIAL_STATE, action) => {
             state.stores = [];
 
             return {
-              INITIAL_STATE,
+              ...INITIAL_STATE,
               stores: action.payload.stores,
               page: action.payload.page,
               sortParams: `?`,

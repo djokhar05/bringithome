@@ -3,33 +3,33 @@ import {Text, SafeAreaView, View, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { RouterLink } from './common/RouterLink';
 import { NativeModules } from 'react-native';
-import { connect } from 'react-redux';
-import { getStores } from '../redux/actions/storesAction';
+// import { connect } from 'react-redux';
+// import { getStores } from '../redux/actions/storesAction';
 
-const reloadApp = () => NativeModules.DevSettings.reload();
+//const reloadApp = () => NativeModules.DevSettings.reload();
 
-class SideBar extends Component {
+export default class SideBar extends Component {
 
-    constructor(props) {
-      super(props);
+    // constructor(props) {
+    //   super(props);
 
-      //console.log(props);
-    }
+    //   //console.log(props);
+    // }
 
-    getStores = () => {
-        this.props.getStores(
-            false,
-            1,
-            10
-        );
-        this.props.navigation.goBack();
-    }
+    // getStores = () => {
+    //     this.props.getStores(
+    //         false,
+    //         1,
+    //         10
+    //     );
+    //     this.props.navigation.goBack();
+    // }
 
     render() {
         return (
             <SafeAreaView style={{backgroundColor:'#D3E3F2', height:'100%'}}>
                 <RouterLink
-                    onPress={this.getStores.bind(this)}
+                    onPress={() => Actions.Drawer()}
                     Link="Home"
                     icon="home"
                 />
@@ -69,6 +69,4 @@ class SideBar extends Component {
 }
 
 
-export default connect(
-    null, {getStores}
-)(SideBar)
+//export default connect(null, {getStores})(SideBar)

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router, Scene, Drawer, Tabs } from 'react-native-router-flux';
 
+import Startup from './components/Startup';
 import About from './components/About';
 import Contact from './components/Contact';
 import Home from './components/Home';
@@ -11,6 +12,12 @@ const RouterComponent = () => {
     return(
         <Router>
             <Scene key="root">
+                <Scene 
+                    key="startup" 
+                    component={Startup}
+                    hideNavBar={true}
+                />
+
                 <Drawer
                     open={false}
                     key="Drawer"
@@ -24,7 +31,6 @@ const RouterComponent = () => {
                             key="Home" 
                             component={Home}
                             title="What Would you like to order today ?"
-                            initial
                             titleStyle={{
                                 fontSize: 17,
                                 fontWeight: 'bold',
@@ -59,7 +65,6 @@ const RouterComponent = () => {
                     }}
                     navigationBarStyle={{ backgroundColor: '#A8D1DF'}}
                 />
-
 
             </Scene>
         </Router>

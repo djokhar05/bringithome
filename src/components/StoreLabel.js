@@ -25,7 +25,7 @@ const StoreLabel = ({ storename, storeaddress, storenumbers, storeoffers, storei
                     <Text style={{borderColor: '#A8D1DF', borderWidth: 3}}>
                         {
                             storenumbers.map(
-                                num => <TouchableNativeFeedback onPress={() => Linking.openURL(`tel:${num}`)}
+                                num => <TouchableNativeFeedback key={num} onPress={() => Linking.openURL(`tel:${num}`)}
                                         background={TouchableNativeFeedback.SelectableBackground()}>
                                             <View style={{width: 'auto', backgroundColor: 'white'}}>
                                                 <Text style={{margin: 10, marginLeft: 3, color: '#117CFE'}}>

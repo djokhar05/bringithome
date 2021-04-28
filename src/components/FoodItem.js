@@ -28,7 +28,7 @@ const FoodItem = ({ foodItems }) => {
                             </FadeInView>
                         </View>
                         <View style={foodTextStyles}><Text style={textStyle}>{item.name}</Text></View>
-                        <View style={foodPriceStyles}><Text style={textStyle}> N {priceToNum.toLocaleString()}</Text></View>
+                        <View style={foodPriceStyles}><Text style={textStyle}> N {Number(priceToNum).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}</Text></View>
                     </View>
                 </CardSection>
             </Card>
