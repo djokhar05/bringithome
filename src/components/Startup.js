@@ -8,8 +8,7 @@ const Startup = () => {
 	useEffect(() => {
 		let startup = setTimeout(() => {
 			Actions.Drawer();
-			console.log("hello in here")
-		}, 1000)
+		}, 1500)
 
 		return () => {
 			clearTimeout(startup)
