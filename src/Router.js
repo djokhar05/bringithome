@@ -1,5 +1,6 @@
 import React from 'react';
-import { Router, Scene, Drawer, Tabs } from 'react-native-router-flux';
+import { Router, Scene, Drawer } from 'react-native-router-flux';
+import { Platform } from 'react-native';
 
 import Startup from './components/Startup';
 import About from './components/About';
@@ -34,7 +35,7 @@ const RouterComponent = () => {
                             titleStyle={{
                                 fontSize: 17,
                                 fontWeight: 'bold',
-                                fontFamily: 'cursive'
+                                fontFamily: Platform.OS == 'ios' ? 'system font' : 'cursive'
                             }}
                             navigationBarStyle={{ backgroundColor: '#D3E3F2'}}
                         />
@@ -61,7 +62,7 @@ const RouterComponent = () => {
                     titleStyle={{
                         fontSize: 17,
                         fontWeight: 'bold',
-                        fontFamily: 'cursive'
+                        fontFamily: Platform.OS == 'ios' ? 'system font' : 'cursive'
                     }}
                     navigationBarStyle={{ backgroundColor: '#A8D1DF'}}
                 />

@@ -25,7 +25,7 @@ export default (state=INITIAL_STATE, action) => {
         case GET_STORES:
           //console.log(action.payload.stores)
           if(action.payload.page == 1){
-            state.stores = [];
+            state = undefined;
 
             return {
               ...INITIAL_STATE,

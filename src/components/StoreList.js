@@ -91,7 +91,7 @@ class StoreList extends PureComponent {
                         style={{paddingBottom: 30}}
                         data={stores}
                         renderItem={this.renderItem}
-                        keyExtractor={item=>item._id.toString()}
+                        keyExtractor={item=>item._id.toString()+Math.random().toString()}
                         onEndReachedThreshold={.6}
                         onEndReached={this.loadMoreStores}
                         ListFooterComponent={this.renderFooter.bind(this)}
