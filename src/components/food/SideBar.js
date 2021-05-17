@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, SafeAreaView, View, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { RouterLink } from './common/RouterLink';
+import { RouterLink } from '../common/RouterLink';
 import { NativeModules } from 'react-native';
 // import { connect } from 'react-redux';
 // import { getStores } from '../redux/actions/storesAction';
@@ -55,11 +55,11 @@ export default class SideBar extends Component {
                 />
 
                 {
-                    // <RouterLink
-                    //     onPress={() => Actions.Contact()}
-                    //     Link="Media"
-                    //     icon="chat"
-                    // />
+                    <RouterLink
+                        onPress={() => Actions.Menu()}
+                        Link="Top Menu"
+                        icon="menu"
+                    />
                 }
 
 

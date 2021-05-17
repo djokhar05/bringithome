@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 //import { seekLocationPermission } from  '../helpers/getLocation';
 import { connect } from 'react-redux';
-import { locations } from '../data';
+import { locations } from '../../data';
 import { Picker } from '@react-native-picker/picker';
-import { sortStores, processing } from '../redux/actions/storesAction';
+import { sortStores, processing } from '../../redux/actions/storesAction';
 
 class Location extends Component {
     state = {

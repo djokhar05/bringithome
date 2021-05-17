@@ -1,6 +1,6 @@
 import React from 'react';
-import { Searchbar } from './common/SearchBar';
-import { foodSort } from '../redux/actions/storesAction';
+import { Searchbar } from '../common/SearchBar';
+import { foodSort } from '../../redux/actions/storesAction';
 import { connect } from 'react-redux';
 import { Text } from 'react-native';
 

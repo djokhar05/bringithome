@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Image } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
-import { Card, CardSection, FadeInView } from './common'
+import { Card, CardSection, FadeInView } from '../common'
 
 const FoodItem = ({ foodItems }) => {
 

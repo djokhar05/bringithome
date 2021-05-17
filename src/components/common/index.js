@@ -8,3 +8,4 @@ export * from './Confirm';
 export * from './RouterLink';
 export * from './Animation';
 export * from './Pagination';
+export * from './Label'

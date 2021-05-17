@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Image, Text } from 'react-native-elements';
 import { View, StyleSheet, Linking, TouchableNativeFeedback, Platform } from 'react-native';
+import { PropTypes } from 'prop-types';
 
-
-const StoreLabel = ({ storename, storeaddress, storenumbers, storeoffers, storeimage }) => {
+const Label = ({ storename, storeaddress, storenumbers, storeimage }) => {
     const { 
         storeStyles, storeImageStylesContainer, 
         storeImageStyles, storeTextStyles, boldText
@@ -70,4 +70,12 @@ const styles = StyleSheet.create({
     }
 })
 
-export default StoreLabel
+export { Label }
+
+
+Label.propTypes = {
+    storename: PropTypes.string.isRequired,
+    storeaddress: PropTypes.object.isRequired,
+    storenumbers: PropTypes.array.isRequired,
+    storeimage: PropTypes.string.isRequired
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import StoreLabel from './StoreLabel';
+import { Label } from '../common';
 
 import Local from './Local';
 import Snack from './Snack';
@@ -23,7 +23,7 @@ class StoreOffers extends Component{
         
         return(
             <NavigationContainer>
-                <StoreLabel
+                <Label
                     storename={item.name}
                     storeaddress={item.address}
                     storenumbers={item.phone}

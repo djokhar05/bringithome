@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import { FlatList, Text, View, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
-import StoreLabel from './StoreLabel';
-import { RouterLink, Spinner } from './common';
+import { RouterLink, Spinner, Label } from '../common';
 import { Actions } from 'react-native-router-flux';
-import { getStores, sortStores, sortingFood } from '../redux/actions/storesAction';
+import { getStores, sortStores, sortingFood } from '../../redux/actions/storesAction';
 
 class StoreList extends PureComponent {
 
@@ -63,7 +62,7 @@ class StoreList extends PureComponent {
     renderItem({ item }){
         return (
             <RouterLink onPress={() => Actions.StoreOffers({item})}>
-                <StoreLabel
+                <Label
                     storename={item.name}
                     storeaddress={item.address}
                     storenumbers={item.phone}
